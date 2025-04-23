@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .image-container {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2d6a4f;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #2d6a4f;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .instructions {
+            font-size: 14px;
+            margin-top: 20px;
+            color: #555;
+            text-align: left;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main">
+    <div class="image-container">
+        <img src="https://d3lzcn6mbbadaf.cloudfront.net/media/details/ANI-20241010093744.jpg" alt="BMI Illustration">
+    </div>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+        <p><strong>What is BMI?</strong> Body Mass Index (BMI) is a measure that uses your height and weight to work out if your weight is healthy. It is calculated by dividing a person's weight in kilograms by the square of their height in meters.</p>
+        <input type="number" id="weight" placeholder="Enter weight in kg">
+        <input type="number" id="height" placeholder="Enter height in meters">
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        <div class="result" id="bmiResult"></div>
+        <details class="instructions">
+            <summary>Instructions</summary>
+            <p>Enter your weight and height, then click the button to calculate your BMI.</p>
+        </details>
+    </div>
+</div>
+
+<h2 style="margin-top: 40px; color: white; border: 2px solid #003366; padding: 15px 40px; background-color: #003366; border-radius: 5px; width: 100%; text-align: center;">OUTPUT</h2>
+<p style="text-align: center; color: #2d6a4f;">Student Name: Nickel Andoy</p>
+
+<script>
+    // Calculate BMI and categorize result
+    function calculateBMI() {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+
+        if (isNaN(weight) || isNaN(height) || height <= 0) {
+            document.getElementById('bmiResult').innerHTML = "Please enter valid numbers.";
+            return;
+        }
+
+        const bmi = weight / (height * height);
+        let category = "";
+
+        if (bmi < 18.5) {
+            category = "Underweight";
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            category = "Normal weight";
+        } else if (bmi >= 25 && bmi <= 29.9) {
+            category = "Overweight";
+        } else {
+            category = "Obese";
+        }
+
+        // Output result
+        document.getElementById('bmiResult').innerHTML = 
+            `Your BMI is ${bmi.toFixed(2)} (${category}).`;
+    }
+</script>
+
+</body>
+</html>
